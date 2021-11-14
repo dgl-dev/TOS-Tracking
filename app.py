@@ -21,3 +21,8 @@ def loadTOS():
 @app.route('/loadRecc')
 def loadRecc():
     return('<h1>Loading Trading Recommendations</h1>')
+
+
+@app.route('/reports')
+def reports(dates):     # dates (from,to)
+    return('<h1>Loading Trading Report</h1>')
