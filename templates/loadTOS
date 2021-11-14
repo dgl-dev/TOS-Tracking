@@ -1,0 +1,18 @@
+
+{% extends 'layout.html' %}
+
+{% block title %}Load TOS{% endblock %}
+
+{% block body %}
+<h1 class="display-2 text-center">Welcome</h1>
+<p class="text-center">Load downloaded .csv with TOS TRD records</p>
+
+<div class="container">
+  <div class="row">
+    <div class="col text-center">
+      Loading TOS TRD records
+    </div>
+  </div>
+</div>
+
+{% endblock %}
