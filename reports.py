@@ -17,3 +17,9 @@ Raises:
 
 def main(dates):
     pass
+
+def select_report():
+    pass
+
+def show_report_results():
+    pass

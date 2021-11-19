@@ -17,7 +17,7 @@
       - CALL / PUT
       - Strike
       - Cost
-  - Load recommendations recs into Reccs.db
+  - Load recommendations recs into TrRecs.db
     - Regularize records from two (or more) sources
       - Date
       - Symbol
@@ -36,7 +36,7 @@ The Flask app provides an interface to
   - loadTOS
     - TRD.db
       - Return connection, create if doesn't exist, throw FileNotFound,
-    - Recc.db - likewise
+    - TrRec.db - likewise
     - Create db from schema or code?
     - Read uploaded .csv w/DictReader
     - Write with execute (not using linux csv to create since .csv struct is wrong)

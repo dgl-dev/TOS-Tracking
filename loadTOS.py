@@ -13,3 +13,11 @@ Raises:
     Exception: description
 
 """
+
+
+def select_TOS_download():
+    pass
+
+
+def show_TOS_load_results():
+    pass
