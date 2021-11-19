@@ -13,5 +13,7 @@ Raises:
     Exception: FileNotFoundError() if databases are not found - see README
 
 """
+
+
 def main(dates):
     pass

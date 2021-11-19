@@ -15,14 +15,14 @@ def index():
 
 @app.route('/loadTOS')
 def loadTOS():
-    return('<h1>Loading TOS TRD Records</h1>')
+    return render_template('loadTOS.html')
 
 
 @app.route('/loadRecc')
 def loadRecc():
-    return('<h1>Loading Trading Recommendations</h1>')
+    return render_template('loadRecc.html')
 
 
 @app.route('/reports')
-def reports(dates):     # dates (from,to)
-    return('<h1>Loading Trading Report</h1>')
+def reports():     # dates (from,to)
+    return render_template('reports.html')

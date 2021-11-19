@@ -31,3 +31,12 @@
 The Flask app provides an interface to
   - run the processing steps
   - Display the results
+
+## Modules
+  - loadTOS
+    - TRD.db
+      - Return connection, create if doesn't exist, throw FileNotFound,
+    - Recc.db - likewise
+    - Create db from schema or code?
+    - Read uploaded .csv w/DictReader
+    - Write with execute (not using linux csv to create since .csv struct is wrong)
