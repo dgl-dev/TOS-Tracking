@@ -6,11 +6,14 @@ from flask import Flask, render_template
 from flask_sqlalchemy import SQLAlchemy
 from flask import request
 from flask import url_for
-from loadTOS import select_TOS_download, show_TOS_load_results
-from loadTrRec import select_TrRec_download, show_TrRec_load_results
-
+from .loadTOS import select_TOS_download, show_TOS_load_results
+from .loadTrRec import select_TrRec_download, show_TrRec_load_results
+from .config import DevConfig
 
 app = Flask(__name__)
+app.config.from_object(DevConfig())
+
+print('app.config: ', app.config)
 
 
 @app.route('/')
@@ -22,7 +25,7 @@ def index():
 def loadTOS():
     #    msg = 'TOS records will be loaded from file/input_files/TOS'
     if request.method == 'POST':
-        return select_TOS_download()
+        render_template('loadTOS.html', select_TOS_download())
     else:
         return show_TOS_load_results()
 #        return render_template('loadTOS.html')
