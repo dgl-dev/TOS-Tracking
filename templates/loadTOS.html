@@ -7,12 +7,26 @@
 <h1 class="display-2 text-center">Load TOS Records</h1>
 <p class="text-center">Load downloaded .csv with TOS TRD records</p>
 
-<div class="container">
-  <div class="row">
-    <div class="col text-center">
-      Loading TOS TRD records
-    </div>
+<<div class="form-wrapper">
+    <h2 class="title">Download TOS TRD records</h2>
+
+    <form method="POST" action="{{ url_for('loadTOS') }}">
+
+      <fieldset class="form-field">
+      {{ form.path.label }}
+      {{ form.path }}
+        {% if form.path.errors %}
+        <ul class="errors">
+          {% for error in form.path.errors %}
+            <li>{{ error }}</li>
+          {% endfor %}
+        </ul>
+        {% endif %}
+      </fieldset>
+
+      {{ form.submit }}
+
+      </form>
   </div>
-</div>
 
 {% endblock %}

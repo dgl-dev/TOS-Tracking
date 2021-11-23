@@ -9,11 +9,12 @@ from flask import url_for
 from .loadTOS import select_TOS_download, show_TOS_load_results
 from .loadTrRec import select_TrRec_download, show_TrRec_load_results
 from .config import DevConfig
+from .forms import DownloadForm
 
 app = Flask(__name__)
 app.config.from_object(DevConfig())
 
-print('app.config: ', app.config)
+#print('app.config: ', app.config)
 
 
 @app.route('/')
@@ -23,11 +24,27 @@ def index():
 
 @app.route('/loadTOS', methods=['GET', 'POST'])
 def loadTOS():
+    """
+    Present form to download TOS TRD recs .csv file
+    Then load those into db
+    :return: Success - download report
+    :rtype: 
+    """
+
+    form = DownloadForm()
+    if form.validate_on_submit():
+        return redirect(url_for("download_report"))
+    return render_template(
+        "loadTOS.html",
+        form=form,
+        template="form-template"
+    )
+    
     #    msg = 'TOS records will be loaded from file/input_files/TOS'
-    if request.method == 'POST':
-        render_template('loadTOS.html', select_TOS_download())
-    else:
-        return show_TOS_load_results()
+    # if request.method == 'POST':
+    #     render_template('loadTOS.html', select_TOS_download())
+    #else:
+    return show_TOS_load_results()
 #        return render_template('loadTOS.html')
 
 
