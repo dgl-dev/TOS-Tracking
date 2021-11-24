@@ -2,7 +2,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-from flask import Flask, render_template
+from flask import Flask, render_template, redirect
 from flask_sqlalchemy import SQLAlchemy
 from flask import request
 from flask import url_for
@@ -14,7 +14,7 @@ from .forms import DownloadForm
 app = Flask(__name__)
 app.config.from_object(DevConfig())
 
-#print('app.config: ', app.config)
+print('app.config: ', app.config)
 
 
 @app.route('/')
@@ -32,7 +32,7 @@ def loadTOS():
     """
 
     form = DownloadForm()
-    if form.validate_on_submit():
+    if request.method == 'POST':
         return redirect(url_for("download_report"))
     return render_template(
         "loadTOS.html",

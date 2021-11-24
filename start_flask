@@ -3,5 +3,4 @@
 #
 # # Start Flask with instance folder containing config.py, etc
 #
-export CONFIG='dev_config.py'
 flask run

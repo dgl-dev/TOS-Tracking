@@ -7,10 +7,10 @@
 <h1 class="display-2 text-center">Load TOS Records</h1>
 <p class="text-center">Load downloaded .csv with TOS TRD records</p>
 
-<<div class="form-wrapper">
-    <h2 class="title">Download TOS TRD records</h2>
+<div class="form-wrapper form-center">
 
-    <form method="POST" action="{{ url_for('loadTOS') }}">
+    <form method="POST" action="{{ '/loadTOS' }}"
+          style="text-align:center">
 
       <fieldset class="form-field">
       {{ form.path.label }}
@@ -24,7 +24,7 @@
         {% endif %}
       </fieldset>
 
-      {{ form.submit }}
+      {{  form.submit }}
 
       </form>
   </div>
