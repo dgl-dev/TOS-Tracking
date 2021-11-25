@@ -16,6 +16,18 @@ Raises:
     Exception: none, error are handled through dialogs
 
 """
+from werkzeug.utils import secure_filename, FileStorage
+from pathlib import Path
+import os
+
+def upload_TOS_download(form_path_data):
+    """Upload the previously downloaded TOS TRD .csv file"""
+    fn = secure_filename(form_path_data.filename)
+    cwd = Path.cwd()
+    """Get DATABASE_FILE_PATH from config.py; 
+        Create dest for upload: TOS_<date>.csv
+    """
+    print(f'TOS filename: {fn}')
 def create_TOS_db():
     """Called if db is found not to exist"""
     pass

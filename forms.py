@@ -1,28 +1,21 @@
 from flask_wtf import FlaskForm, RecaptchaField
-from wtforms import (
-    StringField,
-    TextAreaField,
-    SubmitField,
-    PasswordField,
-    DateField,
-    SelectField
+from wtforms import SubmitField, validators
+from flask_wtf.file import (
+    FileField, FileAllowed, FileRequired
 )
-from wtforms.validators import (
-    DataRequired,
-    Email,
-    EqualTo,
-    Length,
-    URL
-)
+
+import os
 
 class DownloadForm(FlaskForm):
     """Accept file path for download."""
-    path = StringField(
+    path = FileField(
         'Path',
         validators=[
-            DataRequired()
+            FileRequired('Full path to downloaded TOS .csv required')
+#            FileAllowed(['csv'], 'Must be .csv file')
         ]
     )
 
-#    recaptcha = RecaptchaField()
+    #    recaptcha = RecaptchaField()
     submit = SubmitField('Submit')
+

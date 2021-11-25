@@ -6,7 +6,7 @@ from flask import Flask, render_template, redirect
 from flask_sqlalchemy import SQLAlchemy
 from flask import request
 from flask import url_for
-from .loadTOS import select_TOS_download, show_TOS_load_results
+from .loadTOS import select_TOS_download, show_TOS_load_results, upload_TOS_download
 from .loadTrRec import select_TrRec_download, show_TrRec_load_results
 from .config import DevConfig
 from .forms import DownloadForm
@@ -32,7 +32,9 @@ def loadTOS():
     """
 
     form = DownloadForm()
-    if request.method == 'POST':
+    if request.method == 'POST':    #form.validate_on_submit():
+        print('POST', form.path.label, form.path, form.path.data)
+        upload_TOS_download(form.path.data)
         return redirect(url_for("download_report"))
     return render_template(
         "loadTOS.html",
