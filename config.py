@@ -11,6 +11,6 @@ class DevConfig(object):
     TESTING = True
     DATABASE_URI = '/databases/'
     SECRET_KEY = urandom(32)                      # environ.get('SECRET_KEY')
-    """Use python -c 'import os; print(os.urandom(16))'b'_5#y2L"F4Q8z\n\xec]/' """
-    DATABASE_FILE_PATH = '' # Provided by install_TOS_Tracking - two db named: TOS & TrRec.
+    DATABASE_FILE_PATH  =  '/home/limawhiskeydelta/Wrk' # Provided by install_TOS_Tracking - two db named: TOS & TrRec.
+    SQLITE3_CONN = ''   # Holds connection while open;
 

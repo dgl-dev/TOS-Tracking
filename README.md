@@ -36,6 +36,7 @@ The Flask app provides an interface to
   - loadTOS
     - TRD.db
       - Return connection, create if doesn't exist, throw FileNotFound,
+      - User specifies database file path in config.py at installation in DATABASE_FILE_PATH_
     - TrRec.db - likewise
     - Create db from schema or code?
     - Read uploaded .csv w/DictReader
