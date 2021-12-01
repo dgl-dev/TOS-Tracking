@@ -14,8 +14,8 @@ from .forms import DownloadForm
 app = Flask(__name__)
 app.config.from_object(DevConfig())
 
-print('app.config: ', app.config)
-print('DBFP', app.config['DATABASE_FILE_PATH'])
+# print('app.config: ', app.config)
+# print('DBFP', app.config['DATABASE_FILE_PATH'])
 
 
 @app.route('/')

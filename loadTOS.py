@@ -62,18 +62,28 @@ def upload_TOS_download(form_path_data):
         line_count = 0
         for line in f:
             line_count = line_count + 1
-            if line_count > 100: break
+            if line_count > 10: break
             if not line.strip() ==  cur_sect_name:
                 if in_sect:
-                    print(f'cur_sect_name {cur_sect_name} sections[cur_sect_name {sections[cur_sect_name]} \n')
+                    print(f'cur_sect_name {cur_sect_name} sections[cur_sect_name {sections[cur_sect_name]}  \n')
                     sections[cur_sect_name].append(line)  # value is list of lines
             else:   # Only comes here on section headers
                 curr_sect_name = nxt_sect_name
                 sect_id  = sect_id  + 1 # Look for next sect id
                 nxt_sect_name = sect_names[sect_id]
-                in_sect = True
-                print(f'cur_sect_name: {curr_sect_name} in_sect: {in_sect} sect_id: {sect_id} \n')
-        print(f'sections: {sections} \n')
+                in_sect = True  # Stays on after getting to first section
+                # print(f'cur_sect_name: {curr_sect_name} in_sect: {in_sect} sect_id: {sect_id} \n')
+        # print(f'sections: {sections} \n')
+    for key, value in sections.items():   # key is section name; value is list containing the lines in that section
+        print(f'\n >>>> Item: {key} \n list {value}')
+    # Section names may have blanks - ie: Forex Stuff - translate to Forex_Stuff
+        trt = key.maketrans(' ', '_','')
+        sect_fn = key.translate(trt)
+        print(f'Translated: {sect_fn}')
+        with open(uploads_path / sect_fn, 'w') as sect_file:
+            sect_file.writelines(value)
+        sect_file.close()
+
 
 
 
