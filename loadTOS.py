@@ -57,32 +57,41 @@ def upload_TOS_download(form_path_data):
     with fp.open()  as f:
         sect_id = 0
         in_sect = False
-        cur_sect_name = sect_names[sect_id]
-        nxt_sect_name = sect_names[sect_id + 1]
-        line_count = 0
+        cur_sect_name = nxt_sect_name = sect_names[sect_id]
+        # nxt_sect_name = sect_names[sect_id + 1]
+        # line_count = 0
         for line in f:
-            line_count = line_count + 1
-            if line_count > 10: break
-            if not line.strip() ==  cur_sect_name:
-                if in_sect:
-                    print(f'cur_sect_name {cur_sect_name} sections[cur_sect_name {sections[cur_sect_name]}  \n')
-                    sections[cur_sect_name].append(line)  # value is list of lines
+            # line_count = line_count + 1
+            # if line_count <= 10:
+            if not line.strip() ==  nxt_sect_name:      # comes here only for line which is NOT a section header
+                if in_sect:     # only come here if processing a section
+                    # print(f'cur_sect_name {cur_sect_name} sections[cur_sect_name {sections[cur_sect_name]}  \n')
+                    sections[cur_sect_name].append(line)    # value is list of lines
             else:   # Only comes here on section headers
-                curr_sect_name = nxt_sect_name
-                sect_id  = sect_id  + 1 # Look for next sect id
+                if sect_id < len(sect_names) -1:
+                    sect_id += 1  # Look for next sect id
+                # print(f'sect_id index {len(sect_names)} {sect_id}')
                 nxt_sect_name = sect_names[sect_id]
-                in_sect = True  # Stays on after getting to first section
+                curr_sect_name = nxt_sect_name  # now process sect just found
+                # line_count = 0      # reset line count for next section
+                in_sect = True      # Stays on after getting to first section
                 # print(f'cur_sect_name: {curr_sect_name} in_sect: {in_sect} sect_id: {sect_id} \n')
-        # print(f'sections: {sections} \n')
-    for key, value in sections.items():   # key is section name; value is list containing the lines in that section
-        print(f'\n >>>> Item: {key} \n list {value}')
-    # Section names may have blanks - ie: Forex Stuff - translate to Forex_Stuff
-        trt = key.maketrans(' ', '_','')
-        sect_fn = key.translate(trt)
-        print(f'Translated: {sect_fn}')
-        with open(uploads_path / sect_fn, 'w') as sect_file:
-            sect_file.writelines(value)
-        sect_file.close()
+
+        print(f'\n sections: {sections} \n')
+
+        exit()
+        #
+        # # Write sections to files
+        #
+        for key, value in sections.items():   # key is section name; value is list containing the lines in that section
+            # print(f'\n >>>> Item: {key} \n list {value}')
+        # Section names may have blanks - ie: Forex Stuff - translate to Forex_Stuff
+            trt = key.maketrans(' ', '_','')
+            sect_fn = key.translate(trt)
+            # print(f'Translated: {sect_fn}')
+            with open(uploads_path / sect_fn, 'w') as sect_file:
+                sect_file.writelines(value)
+            sect_file.close()
 
 
 
