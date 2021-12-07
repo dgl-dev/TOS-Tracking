@@ -23,6 +23,7 @@ from pathlib import Path
 import os
 from flask import current_app as app
 from collections import OrderedDict
+import itertools
 
 
 def upload_TOS_download(form_path_data):
@@ -57,25 +58,25 @@ def upload_TOS_download(form_path_data):
     with fp.open()  as f:
         sect_id = 0
         in_sect = False
-        cur_sect_name = nxt_sect_name = sect_names[sect_id]
-        # nxt_sect_name = sect_names[sect_id + 1]
-        # line_count = 0
+        curr_sect_name = nxt_sect_name = sect_names[sect_id]
+
+        line_count = 0
         for line in f:
-            # line_count = line_count + 1
-            # if line_count <= 10:
-            if not line.strip() ==  nxt_sect_name:      # comes here only for line which is NOT a section header
-                if in_sect:     # only come here if processing a section
-                    # print(f'cur_sect_name {cur_sect_name} sections[cur_sect_name {sections[cur_sect_name]}  \n')
-                    sections[cur_sect_name].append(line)    # value is list of lines
-            else:   # Only comes here on section headers
-                if sect_id < len(sect_names) -1:
-                    sect_id += 1  # Look for next sect id
-                # print(f'sect_id index {len(sect_names)} {sect_id}')
-                nxt_sect_name = sect_names[sect_id]
-                curr_sect_name = nxt_sect_name  # now process sect just found
-                # line_count = 0      # reset line count for next section
-                in_sect = True      # Stays on after getting to first section
-                # print(f'cur_sect_name: {curr_sect_name} in_sect: {in_sect} sect_id: {sect_id} \n')
+            line_count = line_count + 1
+            if line_count <= 300:
+                if not line.strip() ==  nxt_sect_name:      # comes here only for line which is NOT a section header
+                    if in_sect:     # only come here if processing a section
+                        sections[curr_sect_name].append(line)    # value is list of lines
+                else:   # Only comes here on section headers
+                    print(f"\n >>>> Section Header found ---------------------------------------------------")
+                    print(f"\n >>>> line.strip, curr_sect_name, nxt_sect_name: {line.strip()}, {curr_sect_name}, {nxt_sect_name}")
+                    if sect_id < len(sect_names) -1:
+                        sect_id += 1  # Look for next sect id
+                    curr_sect_name = nxt_sect_name  # now process sect just found
+                    nxt_sect_name = sect_names[sect_id]
+                    line_count = 0      # reset line count for next section
+                    in_sect = True      # Stays on after getting to first section
+                    print(f'\n >>>>>sect_id index  {sect_id} curr_sect_name: {curr_sect_name} nxt_sect_name: {nxt_sect_name}')
 
         print(f'\n sections: {sections} \n')
 
